@@ -4,7 +4,7 @@ body {
 
 #calculator {
 	height: 400px;
-	width: 300px;
+	width: 250px;
 	background-color: #D3D3D3;
 }
 
@@ -14,16 +14,31 @@ body {
 }
 
 #buttons {
-	margin: 6px 3px 0 6px;
+	//margin: 6px 3px 0 6px;
 }
 
 button {
 	height: 60px;
 	width: 60px;
-	border: none;
-	border-radius: 5px;
 	background-color: white;
-	margin: 0 3px 6px 0px;
+	color: green;
+	font-size: 16px;
+	border: 2px solid grey;
+	border-bottom: none;
+	display: inline-block;
+	float: left;
+}
+
+button:not(:last-child) {
+	border-right: none;
+}
+
+.button_row:last-child > button {
+	border-bottom: 2px solid grey;
+}
+
+.double {
+		width: 120px;
 }
 
 button:active {
