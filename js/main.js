@@ -1,4 +1,49 @@
 $(document).ready(function() {
+	
+	var $hours = $('span#hours');
+	var $minutes = $('span#minutes');
+	var field;
+	var select = "h";
+	var input = "";
+
+	$('button.btn-number').on('click', function() {
+		select == "h" ? field = $hours : field = $minutes;
+		field.text(getValue($(this).val()));
+	});
+
+	$('button.btn-select').on('click', function() {
+		if (select == "h") {
+			select = "m"
+		} else {
+			checkMinutes();
+			select = "h";
+		}
+		input = "";
+	})
+
+	$('button.btn-operator').on('click', function() {
+		var operator = $(this).val();
+		checkMinutes();
+	});
+
+	function getValue(number) {
+		if (input.length == 0 && number == 0) {
+			return 0;
+		} else {
+			input = input + number;
+			return input;
+		};
+	};
+
+	function checkMinutes() {
+		if ($minutes.text() > 59) {
+			console.log(Math.floor($minutes.text()/60));
+			console.log($minutes.text() % 60);
+			// $hours.text() + String(Math.floor($minutes.text()/60))
+		};
+	};
+
+	/*
 	var timeStart = 0;
 	var timeEnd = 0;
 	var timeInput = '';
@@ -36,6 +81,12 @@ $(document).ready(function() {
 			$('#minutes').text(displayMinutes($(this).val()));
 		};
 	});
+	*/
+
+
+
+
+
 
 	/*var i = 0;
 
