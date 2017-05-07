@@ -12,7 +12,7 @@ body {
 }
 
 .display {
-	height: 60px;
+	height: 78px;
 }
 
 #buttons {
@@ -55,8 +55,16 @@ button:hover {
 #display {
 	font-size: 26px;
 	font-weight: bold;
-	color: #2A9D8F;
-	padding: 10px;
+	color: #a9d7d2;
+	padding-top: 10px;
+	padding-right: 10px;
+}
+
+#calculate {
+	font-size: 14px;
+	font-weight: bold;
+	color: #7fc4bb;
+	padding-left: 5px;
 }
 
 footer {

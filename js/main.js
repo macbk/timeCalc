@@ -3,10 +3,21 @@ $(document).ready(function() {
 	var $hours = $('span#hours');
 	var $minutes = $('span#minutes');
 	var field;
+	//Default hours field is active
 	var select = "h";
+	$hours.css('color', '#2A9D8F');
 	var input = "";
+	var totalTime = "";
 
 	$('button.btn-number').on('click', function() {
+		if (select == "newTime") {
+			select = "h";
+			$hours.text('0');
+			$minutes.text('00')
+			$hours.css('color', '#2A9D8F');
+			$minutes.css('color', '#a9d7d2');
+			input = "";
+		}
 		select == "h" ? field = $hours : field = $minutes;
 		field.text(getValue($(this).val()));
 	});
@@ -14,9 +25,13 @@ $(document).ready(function() {
 	$('button.btn-select').on('click', function() {
 		if (select == "h") {
 			select = "m"
-		} else {
+			$minutes.css('color', '#2A9D8F');
+			$hours.css('color', '#a9d7d2');
+		} else if (select == "m") {
 			checkMinutes();
 			select = "h";
+			$hours.css('color', '#2A9D8F');
+			$minutes.css('color', '#a9d7d2');
 		}
 		input = "";
 	})
@@ -24,6 +39,17 @@ $(document).ready(function() {
 	$('button.btn-operator').on('click', function() {
 		var operator = $(this).val();
 		checkMinutes();
+		$hours.css('color', '#2A9D8F');
+		$minutes.css('color', '#2A9D8F');
+		console.log(eval($hours.text()*60+'+'+$minutes.text()));
+		select = "newTime";
+		if (operator == "=") {
+			calculate($hours.text()+':'+$minutes.text());
+			//to sum
+		} else {
+			calculate($hours.text()+':'+$minutes.text()+operator);
+		}
+		
 	});
 
 	function getValue(number) {
@@ -37,10 +63,20 @@ $(document).ready(function() {
 
 	function checkMinutes() {
 		if ($minutes.text() > 59) {
-			console.log(Math.floor($minutes.text()/60));
-			console.log($minutes.text() % 60);
-			// $hours.text() + String(Math.floor($minutes.text()/60))
+			var hoursDisplayed = $hours.text();
+			var hoursToAdd = Math.floor($minutes.text()/60);
+			var minToDisplay = $minutes.text() % 60;
+			if (minToDisplay < 10) {
+				minToDisplay = '0' + minToDisplay;
+			}
+			$hours.text(eval(hoursDisplayed+'+'+hoursToAdd));
+			$minutes.text(minToDisplay);
 		};
+	};
+
+	function calculate(time) {
+		totalTime = totalTime + time;
+		$('p#calculate').text(totalTime);
 	};
 
 	/*
